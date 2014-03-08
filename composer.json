@@ -1,0 +1,14 @@
+{
+    "name": "innoscience/passwordly",
+    "description": "Password generator & checker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brandon Fenning",
+            "email": "brandon.fenning@gmail.com"
+        }
+    ],
+    "require": {
+
+    }
+}
