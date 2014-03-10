@@ -1,14 +1,20 @@
 {
     "name": "innoscience/passwordly",
-    "description": "Password generator & checker",
-    "license": "MIT",
+    "version": "1.0.0",
+    "type": "library",
+    "description": "A light-weight package for generating and checking passwords with requirements for PHP.",
+    "keywords": ["password"],
+    "homepage": "https://github.com/innoscience/passwordly",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Brandon Fenning",
-            "email": "brandon.fenning@gmail.com"
+            "email": "brandon@innosience.net",
+            "homepage": "http://www.innoscience.net",
+            "role": "Developer"
         }
     ],
     "require": {
-
+      "php": ">=5.3.0"
     }
 }
