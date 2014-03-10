@@ -1,5 +1,6 @@
 # Passwordly
-A light-weight PHP package for easily generating and checking passwords.
+A light-weight package for generating and checking passwords with requirements for PHP.
+
 
 Copyright (C) 2014 Brandon Fenning
 
@@ -72,7 +73,7 @@ Passwordly can be instantiated either via the `Passwordly::can()` static constru
 * `errors()` : Returns an `array` of errors resulting from a `->check()`
 
 ### Utility Methods
-These utility classes affect all instances of Passwordly when used.
+These utility methods affect all instances of Passwordly when used.
 
 * `Passwordly::setLowerPool($characterPool)` : Override the lower-case character pool
 * `Passwordly::setUpperPool($characterPool)` : Override the upper-case character pool
