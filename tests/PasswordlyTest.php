@@ -1,12 +1,12 @@
 <?php
 
-
-
 require_once(__DIR__.'/../Passwordly.php');
 
 use Innos\Passwordly\Passwordly;
 
 class PasswordlyTest extends PHPUnit_Framework_TestCase {
+	
+	var $dummy = array();	
 
 	function testGenerateLength() {
 		$password = Passwordly::can()->hasLength(8)->generate();
@@ -17,7 +17,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateLower() {
 		$password = Passwordly::can()->hasLower(8)->generate(8);
 
-		$passwordCheck = preg_match_all('/[a-z]/', $password);
+		$passwordCheck = preg_match_all('/[a-z]/', $password, $this->dummy);
 
 		$this->assertGreaterThanOrEqual(8, $passwordCheck);
 	}
@@ -25,7 +25,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateUpper() {
 		$password = Passwordly::can()->hasUpper(8)->generate(8);
 
-		$passwordCheck = preg_match_all('/[A-Z]/', $password);
+		$passwordCheck = preg_match_all('/[A-Z]/', $password, $this->dummy);
 
 		$this->assertGreaterThanOrEqual(8, $passwordCheck);
 	}
@@ -33,7 +33,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateNumbers() {
 		$password = Passwordly::can()->hasNumbers(8)->generate(8);
 
-		$passwordCheck = preg_match_all('/[0-9]/', $password);
+		$passwordCheck = preg_match_all('/[0-9]/', $password, $this->dummy);
 
 		$this->assertGreaterThanOrEqual(8, $passwordCheck);
 	}
@@ -41,7 +41,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateSymbols() {
 		$password = Passwordly::can()->hasSymbols(8)->generate(8);
 
-		$passwordCheck = preg_match_all('/[~`!@#$%^&*()_={}+\[\]|\-\\\;:"\'<>,.\/?]/', $password);
+		$passwordCheck = preg_match_all('/[~`!@#$%^&*()_={}+\[\]|\-\\\;:"\'<>,.\/?]/', $password, $this->dummy);
 
 		$this->assertEquals(8, $passwordCheck);
 	}
@@ -49,7 +49,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateSpaces() {
 		$password = Passwordly::can()->hasSpaces(8)->generate(8);
 
-		$passwordCheck = preg_match_all('/[ ]/', $password);
+		$passwordCheck = preg_match_all('/[ ]/', $password, $this->dummy);
 
 		$this->assertEquals(8, $passwordCheck);
 	}
@@ -57,7 +57,7 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	function testGenerateChained() {
 		$password = Passwordly::can()->hasSymbols(1)->hasUpper(1)->hasNumbers(1)->generate(8);
 
-		$passwordCheck = preg_match_all('/[\w~`!@#$%^&*()_={}+\[\]|\-\\\;:"\'<>,.\/?]/', $password);
+		$passwordCheck = preg_match_all('/[\w~`!@#$%^&*()_={}+\[\]|\-\\\;:"\'<>,.\/?]/', $password, $this->dummy);
 
 		$this->assertGreaterThanOrEqual(8, $passwordCheck);
 	}
@@ -229,8 +229,6 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 		$password = Passwordly::can()->hasUpper(12)->generate();
 
 	}
-
-
 
 }
  
