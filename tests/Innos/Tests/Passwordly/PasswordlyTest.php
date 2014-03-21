@@ -1,7 +1,5 @@
 <?php
 
-require_once(__DIR__.'/../Passwordly.php');
-
 use Innos\Passwordly\Passwordly;
 
 class PasswordlyTest extends PHPUnit_Framework_TestCase {
