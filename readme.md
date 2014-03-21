@@ -23,7 +23,7 @@ After this, run `composer update`
 
 Passwordly is namespaced to `innoscience/passwordly/passwordly`, at the top of your file you'll want to use:
 
-	use Innoscience/Passwordly/Passwordly;
+	use Innoscience\Passwordly\Passwordly;
 
 ### Creating passwords
 When creating passwords, Passwordly first checks what the character requirements are. Any difference is made up with the addition of randomly cased alphanumeric characters.
