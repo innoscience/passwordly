@@ -2,7 +2,7 @@
     "name": "innoscience/passwordly",
     "version": "1.0.0",
     "type": "library",
-    "description": "A light-weight package for generating and checking passwords with requirements for PHP.",
+    "description": "An absurdly simple package for generating and validating random requirement-based passwords for PHP.",
     "keywords": ["password"],
     "homepage": "https://github.com/innoscience/passwordly",
     "license": "GPLv2",
@@ -15,9 +15,10 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Innos": "lib/"
+        "psr-4": {
+            "Innoscience\\Passwordly\\": "src/"
         }
+
     },
     "require": {
       "php": ">=5.3.0"
