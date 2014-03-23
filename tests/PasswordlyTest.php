@@ -173,7 +173,6 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testDualUsage() {
-		//$password = 'abc123@#$ABC';
 		$passwordly = new Passwordly;
 
 		$password = $passwordly->hasUpper(1,3)->hasNumbers(1,3)->hasSymbols(1,3)->hasSpaces(1)->generate(16);
@@ -214,19 +213,14 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Exception
 	 */
 	function testQualifiersException() {
-
-		$password = Passwordly::can()->hasUpper(12)->generate(8);
-
+		Passwordly::can()->hasUpper(12)->generate(8);
 	}
 
 	/**
 	 * @expectedException Exception
 	 */
 	function testLengthException() {
-
-		$password = Passwordly::can()->hasUpper(12)->generate();
-
+		Passwordly::can()->hasUpper(12)->generate();
 	}
 
 }
- 
