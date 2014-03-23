@@ -1,101 +1,203 @@
 <?php
 
 namespace Innoscience\Passwordly;
-use \Exception;
 
+/**
+ * Class Passwordly
+ * @package Innoscience\Passwordly
+ */
 class Passwordly {
 
+	/**
+	 * @var string
+	 */
 	protected static $lowerPool = 'abcdefghijklmnopqrstuvwxyz';
+	/**
+	 * @var string
+	 */
 	protected static $upperPool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	/**
+	 * @var string
+	 */
 	protected static $numPool = '0123456789';
+	/**
+	 * @var string
+	 */
 	protected static $symbolPool = '~`!@#$%^&*()_-+={[}]|\:;"\',<.>/?';
+	/**
+	 * @var null
+	 */
 	protected static $disableOpenssl = null;
 
+	/**
+	 * @var null
+	 */
 	protected $strict = null;
+	/**
+	 * @var array
+	 */
 	protected $parameters = array();
+	/**
+	 * @var array
+	 */
 	protected $errors = array();
 
+	/**
+	 * @return static
+	 */
 	public static function can() {
 		return new static;
 	}
 
+	/**
+	 * @param $characterPool
+	 */
 	public static function setLowerPool($characterPool) {
 		static::$lowerPool = $characterPool;
 	}
 
+	/**
+	 * @param $characterPool
+	 */
 	public static function setUpperPool($characterPool) {
 		static::$upperPool = $characterPool;
 	}
 
+	/**
+	 * @param $characterPool
+	 */
 	public static function setNumberPool($characterPool) {
 		static::$numPool = $characterPool;
 	}
 
+	/**
+	 * @param $characterPool
+	 */
 	public static function setSymbolPool($characterPool) {
 		static::$symbolPool = $characterPool;
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function getLowerPool() {
 		return static::$lowerPool;
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function getUpperPool() {
 		return static::$upperPool;
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function getNumberPool() {
 		return static::$numPool;
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function getSymbolPool() {
 		return static::$symbolPool;
 	}
 
+	/**
+	 * @param $bool
+	 */
 	public static function setDisableOpenssl($bool) {
 		static::$disableOpenssl = $bool;
 	}
 
+	/**
+	 * @param int $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasLower($min = 1, $max = null) {
 		$this->addQualifier('lower', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @param int $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasUpper($min = 1, $max = null) {
 		$this->addQualifier('upper', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @param int $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasNumbers($min = 1, $max = null) {
 		$this->addQualifier('numbers', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @param int $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasSymbols($min = 1, $max = null) {
 		$this->addQualifier('symbols', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @param int $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasSpaces($min = 1, $max = null) {
 		$this->addQualifier('spaces', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @param $min
+	 * @param null $max
+	 *
+	 * @return $this
+	 */
 	public function hasLength($min, $max = null) {
 		$this->addQualifier('length', $min, $max);
 		return $this;
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function strict() {
 		$this->strict = true;
 		return $this;
 	}
 
-
+	/**
+	 * @return array
+	 */
 	public function errors() {
 		return $this->errors;
 	}
 
-
+	/**
+	 * @param $name
+	 * @param int $min
+	 * @param null $max
+	 */
 	protected function addQualifier($name, $min = 1, $max = null) {
 		$this->setMin($name, $min);
 		$this->setMax($name, $max);
@@ -108,6 +210,11 @@ class Passwordly {
 		}
 	}
 
+	/**
+	 * @param $name
+	 *
+	 * @return null
+	 */
 	protected function getLimit($name) {
 		if (!isset($this->parameters[$name]['limit'])) {
 			return null;
@@ -116,6 +223,11 @@ class Passwordly {
 		return $this->parameters[$name]['limit'];
 	}
 
+	/**
+	 * @param $name
+	 *
+	 * @return null
+	 */
 	protected function getMin($name) {
 		if (!isset($this->parameters[$name]['min'])) {
 			return null;
@@ -123,6 +235,11 @@ class Passwordly {
 		return $this->parameters[$name]['min'];
 	}
 
+	/**
+	 * @param $name
+	 *
+	 * @return null
+	 */
 	protected function getMax($name) {
 		if (!isset($this->parameters[$name]['max'])) {
 			return null;
@@ -130,18 +247,41 @@ class Passwordly {
 		return $this->parameters[$name]['max'];
 	}
 
+	/**
+	 * @param $name
+	 * @param $num
+	 *
+	 * @return mixed
+	 */
 	protected function setLimit($name, $num) {
 		return $this->parameters[$name]['limit'] = $num;
 	}
 
+	/**
+	 * @param $name
+	 * @param $num
+	 *
+	 * @return mixed
+	 */
 	protected function setMin($name, $num) {
 		return $this->parameters[$name]['min'] = $num;
 	}
 
+	/**
+	 * @param $name
+	 * @param $num
+	 *
+	 * @return mixed
+	 */
 	protected function setMax($name, $num) {
 		return $this->parameters[$name]['max'] = $num;
 	}
 
+	/**
+	 * @param $password
+	 *
+	 * @return bool
+	 */
 	public function check($password) {
 
 		$this->errors = array();
@@ -202,6 +342,12 @@ class Passwordly {
 
 	}
 
+	/**
+	 * @param $characterPool
+	 * @param $password
+	 *
+	 * @return int
+	 */
 	protected function checkPool($characterPool, $password) {
 		$count = 0;
 		for ($curChar = 0; $curChar < strlen($password); $curChar++) {
@@ -210,10 +356,20 @@ class Passwordly {
 		return $count;
 	}
 
+	/**
+	 * @param $characterPool
+	 *
+	 * @return string
+	 */
 	protected function getRandomChar($characterPool) {
 		return substr($characterPool, rand(0, strlen($characterPool) - 1), 1);
 	}
 
+	/**
+	 * @param $length
+	 *
+	 * @return string
+	 */
 	public function getRandomStr($length) {
 		$bytes = false;
 
@@ -228,19 +384,26 @@ class Passwordly {
 		return substr(str_replace(array('/', '+', '='), '', base64_encode($bytes)), 0, $length);
 	}
 
+	/**
+	 * @param null $length
+	 * @param null $maxLength
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
 	public function generate($length = null, $maxLength = null) {
 		if ($length) {
 			$this->addQualifier('length', $length, $maxLength);
 		}
 
 		if (!$this->getLimit('length')) {
-			throw new Exception("Password length is required.");
+			throw new \Exception("Password length is required.");
 		}
 
 		$minValidLength = $this->getLimit('lower') + $this->getLimit('upper') +$this->getLimit('numbers') + $this->getLimit('symbols') + $this->getLimit('pools');
 
 		if ($this->getMin('length') < $minValidLength) {
-			throw new Exception("Password length [".$this->getMin('length')."] cannot be less than number of qualifiers [{$minValidLength}].");
+			throw new \Exception("Password length [".$this->getMin('length')."] cannot be less than number of qualifiers [{$minValidLength}].");
 		}
 
 		$passwordPool = '';
