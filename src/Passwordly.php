@@ -310,23 +310,23 @@ class Passwordly {
 			$this->errors['length'] = "Password be at least ".$this->getMin('length')." characters in length.";
 		}
 
-		if ($this->strict && $this->getMax('lower') && $this->checkPool(static::getLowerPool(), $password) < $this->getMax('lower')) {
+		if ($this->strict && $this->getMax('lower') && $this->checkPool(static::getLowerPool(), $password) > $this->getMax('lower')) {
 			$this->errors['lower'] = "Password must contain at least ".$this->getMax('lower')." lower-case characters.";
 		}
 
-		if ($this->strict && $this->getMax('upper') && $this->checkPool(static::getUpperPool(), $password) < $this->getMax('upper')) {
+		if ($this->strict && $this->getMax('upper') && $this->checkPool(static::getUpperPool(), $password) > $this->getMax('upper')) {
 			$this->errors['upper'] = "Password must contain at least ".$this->getMin('upper')." upper-case characters.";
 		}
 
-		if ($this->strict && $this->getMax('numbers') && $this->checkPool(static::getNumberPool(), $password) < $this->getMax('numbers')) {
+		if ($this->strict && $this->getMax('numbers') && $this->checkPool(static::getNumberPool(), $password) > $this->getMax('numbers')) {
 			$this->errors['numbers'] = "Password must contain at least ".$this->getMin('numbers')." numbers.";
 		}
 
-		if ($this->strict && $this->getMax('symbols') && $this->checkPool(static::getSymbolPool(), $password) < $this->getMax('symbols')) {
+		if ($this->strict && $this->getMax('symbols') && $this->checkPool(static::getSymbolPool(), $password) > $this->getMax('symbols')) {
 			$this->errors['symbols'] = "Password must contain at least ".$this->getMax('symbols')." non-alphanumeric characters.";
 		}
 
-		if ($this->strict && $this->getMax('spaces') && $this->checkPool(' ', $password) < $this->getMax('spaces')) {
+		if ($this->strict && $this->getMax('spaces') && $this->checkPool(' ', $password) > $this->getMax('spaces')) {
 			$this->errors['spaces'] = "Password must contain at least ".$this->getMax('spaces')." spaces.";
 		}
 
