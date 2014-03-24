@@ -191,10 +191,11 @@ class PasswordlyTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testCheckStrictMode() {
-		$password = 'abcabcab123';
-		$check = Passwordly::can()->hasLength(8)->strict()->check($password);
-
-		$this->assertTrue($check);
+		$password = 'abcab ca% #$%ASDb 12123';
+		$check = Passwordly::can()->hasLength(8,10)->hasLower(1,2)->hasUpper(1,2)->hasNumbers(1,2)->hasSymbols(1,2)->hasSpaces(1,2)->strict()->check($password);
+		$check2 = Passwordly::can()->hasLength(8)->hasLower(1)->hasUpper(1)->hasNumbers(1)->hasSymbols(1)->hasSpaces(1)->strict()->check($password);
+		$this->assertFalse($check);
+		$this->assertTrue($check2);
 	}
 
 	function testOverridePools() {
