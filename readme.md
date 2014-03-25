@@ -1,5 +1,5 @@
 # Passwordly
-A light-weight package for generating and checking passwords with requirements for PHP.
+An absurdly simple package for generating and validating random requirement-based passwords for PHP.
 
 [![Build Status](https://travis-ci.org/innoscience/passwordly.png?branch=master)](https://travis-ci.org/innoscience/passwordly)
 
